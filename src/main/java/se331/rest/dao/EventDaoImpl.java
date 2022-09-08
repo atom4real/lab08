@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public class EventDaoImpl implements  EventDao {
     List<Event> eventList;
-    //ADD THE ORGANIZER
-    List<Organizer> eventList2;
 
     @PostConstruct
     public void init() {
@@ -83,38 +81,6 @@ public class EventDaoImpl implements  EventDao {
                 .petAllowed(false)
                 .organizer("Brody Kill")
                 .build());
-
-        eventList2 = new ArrayList<>();
-        eventList2.add(Organizer.builder()
-                .id(1L)
-                .organizationName("Name1")
-                .address("address1")
-                .build());
-        eventList2.add(Organizer.builder()
-                .id(2L)
-                .organizationName("Name2")
-                .address("address2")
-                .build());
-        eventList2.add(Organizer.builder()
-                .id(3L)
-                .organizationName("Name3")
-                .address("address3")
-                .build());
-        eventList2.add(Organizer.builder()
-                .id(4L)
-                .organizationName("Name4")
-                .address("address4")
-                .build());
-        eventList2.add(Organizer.builder()
-                .id(5L)
-                .organizationName("Name5")
-                .address("address5")
-                .build());
-        eventList2.add(Organizer.builder()
-                .id(6L)
-                .organizationName("Name6")
-                .address("address6")
-                .build());
     }
 
     @Override
@@ -129,27 +95,9 @@ public class EventDaoImpl implements  EventDao {
         return eventList.stream().filter(event ->
                 event.getId().equals(id)).findFirst().orElse(null);
     }
-
-    //ADD THE ORGANIZER
     @Override
     public Integer getEventSize() {
         return eventList.size();
     }
-    @Override
-    public Integer getOrganizerSize() {
-        return eventList2.size();
-    }
 
-    @Override
-    public List<Organizer> getOrganizers(Integer pageSize, Integer page) {
-        pageSize = pageSize == null ? eventList2.size() : pageSize;
-        page = page == null ? 1 : page;
-        int firstIndex = (page - 1) * pageSize;
-        return eventList2.subList(firstIndex, firstIndex+pageSize);
-    }
-    @Override
-    public Organizer getOrganizer(Long id) {
-        return eventList2.stream().filter(organizer ->
-                organizer.getId().equals(id)).findFirst().orElse(null);
-    }
 }

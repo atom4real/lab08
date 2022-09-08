@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class EventController {
-    @GetMapping("event")
+    @GetMapping("events")
     public ResponseEntity<?> getEventLists(@RequestParam(value = "_limit",
             required = false)Integer perPage
             ,@RequestParam(value = "_page", required = false)Integer page) {
@@ -32,7 +32,7 @@ public class EventController {
             return ResponseEntity.ok(output);
         }
     }
-    @GetMapping("event/{id}")
+    @GetMapping("events/{id}")
     public ResponseEntity<?> getEvent(@PathVariable("id") Long id) {
         Event output = null;
         for(Event event : eventList) {
@@ -56,7 +56,7 @@ public class EventController {
         eventList.add(Event.builder()
                 .id(123L)
                 .category("animal welfare")
-                .title("Cat Adoption Day")
+                .title("Cat Adoption Days")
                 .description("Find your new feline friend at this event.")
                 .location("Meow Town")
                 .date("January 28, 2022")
